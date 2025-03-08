@@ -4,7 +4,7 @@
 
 # Server Configuration
 SERVER_HOST = '0.0.0.0'  # Default host (0.0.0.0 allows external connections)
-SERVER_PORT = 4000       # Default port number
+SERVER_PORT = 80       # Default port number
 
 # Application Configuration
 APP_TITLE = 'File server - Made by kingcodfish'  # Title shown in browser
