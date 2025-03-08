@@ -8,7 +8,7 @@ SERVER_PORT = 80       # Default port number
 
 # Application Configuration
 APP_TITLE = 'File server - Made by kingcodfish'  # Title shown in browser
-UPLOAD_FOLDER = '/path/to/upload/directory'  # Default upload directory
+UPLOAD_FOLDER = '/path/to/upload/directory'  # Default upload directory (where files are stored, including the python file)
 
 # =============================================================================
 
