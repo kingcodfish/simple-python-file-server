@@ -155,26 +155,25 @@ def file_manager(subpath):
             os.makedirs(os.path.join(current_path, folder_name), exist_ok=True)
             return redirect(url_for('file_manager', subpath=subpath))
     
-    # Get list of files and directories, excluding "fileserver.py"
+    # Get list of files and directories
     entries = []
     for entry in os.listdir(current_path):
-        if entry != "fileserver.py":
-            full_path = os.path.join(current_path, entry)
-            is_dir = os.path.isdir(full_path)
-            if not is_dir:
-                size, modified = get_file_details(full_path)
-                icon = DIR_ICON if is_dir else get_file_icon(entry)
-            else:
-                size = '-'
-                modified = '-'
-                icon = DIR_ICON
-            entries.append({
-                'name': entry,
-                'is_dir': is_dir,
-                'size': size,
-                'modified': modified,
-                'icon': icon
-            })
+        full_path = os.path.join(current_path, entry)
+        is_dir = os.path.isdir(full_path)
+        if not is_dir:
+            size, modified = get_file_details(full_path)
+            icon = DIR_ICON if is_dir else get_file_icon(entry)
+        else:
+            size = '-'
+            modified = '-'
+            icon = DIR_ICON
+        entries.append({
+            'name': entry,
+            'is_dir': is_dir,
+            'size': size,
+            'modified': modified,
+            'icon': icon
+        })
     
     # Sort directories first, then files
     directories = [entry for entry in entries if entry['is_dir']]
