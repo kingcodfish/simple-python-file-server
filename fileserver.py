@@ -44,7 +44,37 @@ FILE_ICONS = {
     # Archives
     'zip': '📦',
     'rar': '📦',
-    '7z': '📦'
+    '7z': '📦',
+    
+    # Programming Languages
+    'py': '🐍',     # Python
+    'js': '📜',     # JavaScript
+    'ts': '📘',     # TypeScript
+    'html': '🌐',   # HTML
+    'css': '🎨',    # CSS
+    'java': '☕',    # Java
+    'cpp': '⚡',     # C++
+    'c': '⚙️',      # C
+    'cs': '🔷',     # C#
+    'php': '🐘',    # PHP
+    'rb': '💎',     # Ruby
+    'go': '🔵',     # Go
+    'rs': '⚙️',     # Rust
+    'swift': '🔶',  # Swift
+    'kt': '🟣',     # Kotlin
+    
+    # Web Development
+    'json': '📋',   # JSON
+    'xml': '📋',    # XML
+    'yml': '📋',    # YAML
+    'yaml': '📋',   # YAML
+    'md': '📝',     # Markdown
+    'sql': '🗃️',    # SQL
+    
+    # Scripts
+    'sh': '⌨️',     # Shell
+    'bat': '⌨️',    # Batch
+    'ps1': '⌨️',    # PowerShell
 }
 
 # Directory icon (can be customized)
