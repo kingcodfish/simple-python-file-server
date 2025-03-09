@@ -107,14 +107,15 @@ Feel free to make pull requests or modify the code to fit your needs. To report 
 
 ## License & Attribution
 
-### MIT License
+### MIT License (Modified)
 
 Copyright (c) 2025 kingcodfish
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, and sublicense the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 1. The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 2. Attribution must be given to the original author in any derivative works.
+3. Selling or commercially distributing this software or any derivative works is not permitted.
 
 ### Attribution Requirements
 
@@ -129,10 +130,8 @@ When using, modifying, or distributing this software, please:
    - Include author's website: [kcodfish.com](https://kcodfish.com)
 
 3. **Changes Documentation**
-   - If you modify the code, add a section in your documentation that clearly states:
-     - What changes were made
-     - Why the changes were made
-     - Date of modifications
+   - Document any modifications made to the original code
+   - Maintain a list of changes in your documentation
 
 4. **License Inclusion**
    - Include this complete license and attribution section in your documentation
