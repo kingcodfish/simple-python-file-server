@@ -35,6 +35,8 @@ pip install flask
 
 The following settings can be modified in `fileserver.py`:
 
+> ⚠️ **Important**: Place the `fileserver.py` file outside of your `UPLOAD_FOLDER` directory to prevent it from being accessible or accidentally deleted through the web interface.
+
 ```python
 # Network Configuration
 SERVER_HOST = '0.0.0.0'  # Listen on all available interfaces
