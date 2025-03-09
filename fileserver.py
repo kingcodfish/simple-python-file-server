@@ -90,8 +90,8 @@ def get_file_details(path):
         size /= 1024.0
     size = f"{size:.1f} {unit}"
     
-    # Convert timestamp to readable format
-    modified = datetime.fromtimestamp(modified).strftime('%Y-%m-%d %H:%M')
+    # Convert timestamp to readable format with 12h time and dd/mm/yyyy date
+    modified = datetime.fromtimestamp(modified).strftime('%d/%m/%Y %I:%M %p')
     
     return size, modified
 
