@@ -1,14 +1,54 @@
 # =============================================================================
-# Configuration Settings
+#   Simple Python File Server Configuration
 # =============================================================================
 
-# Server Configuration
-SERVER_HOST = '0.0.0.0'  # Default host (0.0.0.0 allows external connections)
-SERVER_PORT = 80       # Default port number
+# Network Configuration
+# --------------------
+SERVER_HOST = '0.0.0.0'  # Listen on all available interfaces
+SERVER_PORT = 80         # HTTP default port
 
-# Application Configuration
-APP_TITLE = 'File server - Made by kingcodfish'  # Title shown in browser
-UPLOAD_FOLDER = '/path/to/upload/directory'  # Default upload directory (where files are stored, including the python file)
+# Application Settings
+# -------------------
+APP_TITLE = 'File server - Made by kingcodfish'
+UPLOAD_FOLDER = '/path/to/upload/directory'
+
+# File Type Icons
+# --------------
+# Define custom icons for different file extensions
+# Leave any extension undefined to show no icon
+# Format: 'extension': 'emoji or text icon'
+FILE_ICONS = {
+    # Documents
+    'pdf': '📄',
+    'txt': '📝',
+    'doc': '📄',
+    'docx': '📄',
+    
+    # Spreadsheets
+    'xls': '📊',
+    'xlsx': '📊',
+    'csv': '📊',
+    
+    # Images
+    'jpg': '🖼️',
+    'jpeg': '🖼️',
+    'png': '🖼️',
+    'gif': '🖼️',
+    
+    # Media
+    'mp3': '🎵',
+    'wav': '🎵',
+    'mp4': '🎥',
+    'avi': '🎥',
+    
+    # Archives
+    'zip': '📦',
+    'rar': '📦',
+    '7z': '📦'
+}
+
+# Directory icon (can be customized)
+DIR_ICON = '📁'
 
 # =============================================================================
 
@@ -16,6 +56,7 @@ from flask import Flask, request, render_template_string, send_file, redirect, u
 import os
 import shutil
 import mimetypes
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -34,6 +75,32 @@ def delete_directory(path):
         for name in dirs:
             os.rmdir(os.path.join(root, name))
     os.rmdir(path)
+
+# Helper function to get file details
+def get_file_details(path):
+    stats = os.stat(path)
+    size = stats.st_size
+    modified = stats.st_mtime
+    
+    # Convert size to human readable format
+    for unit in ['B', 'KB', 'MB', 'GB']:
+        if size < 1024:
+            break
+        size /= 1024
+    size = f"{size:.1f} {unit}"
+    
+    # Convert timestamp to readable format
+    modified = datetime.fromtimestamp(modified).strftime('%Y-%m-%d %H:%M')
+    
+    return size, modified
+
+# Helper function to get file icon
+def get_file_icon(filename):
+    """Get the icon for a given filename based on its extension."""
+    if '.' in filename:
+        ext = filename.lower().split('.')[-1]
+        return FILE_ICONS.get(ext, '')  # Return empty string if no icon defined
+    return ''  # No extension = no icon
 
 # Home and file upload form
 @app.route('/', defaults={'subpath': ''}, methods=['GET', 'POST'])
@@ -59,12 +126,25 @@ def file_manager(subpath):
             return redirect(url_for('file_manager', subpath=subpath))
     
     # Get list of files and directories, excluding "fileserver.py"
-    entries = os.listdir(current_path)
-    entries = [
-        {'name': entry, 'is_dir': os.path.isdir(os.path.join(current_path, entry))}
-        for entry in entries
-        if entry != "fileserver.py"
-    ]
+    entries = []
+    for entry in os.listdir(current_path):
+        if entry != "fileserver.py":
+            full_path = os.path.join(current_path, entry)
+            is_dir = os.path.isdir(full_path)
+            if not is_dir:
+                size, modified = get_file_details(full_path)
+                icon = DIR_ICON if is_dir else get_file_icon(entry)
+            else:
+                size = '-'
+                modified = '-'
+                icon = DIR_ICON
+            entries.append({
+                'name': entry,
+                'is_dir': is_dir,
+                'size': size,
+                'modified': modified,
+                'icon': icon
+            })
     
     # Sort directories first, then files
     directories = [entry for entry in entries if entry['is_dir']]
@@ -172,11 +252,13 @@ def file_manager(subpath):
             <ul>
                 {% for entry in entries %}
                     <li>
+                        {{ entry.icon }}
                         {% if entry.is_dir %}
                             <a href="{{ url_for('file_manager', subpath=(subpath + '/' + entry.name).strip('/')) }}">{{ entry.name }}/</a>
                         {% else %}
                             <a href="{{ url_for('serve_file', subpath=(subpath + '/' + entry.name).strip('/')) }}">{{ entry.name }}</a>
                         {% endif %}
+                        <span style="color: #888; margin-left: 10px;">{{ entry.size }} - {{ entry.modified }}</span>
                         <form method="post" action="{{ url_for('delete_entry', subpath=(subpath + '/' + entry.name).strip('/')) }}" style="display:inline;" onsubmit="return confirmDelete('{{ entry.name }}')">
                             <button type="submit">Delete</button>
                         </form>
@@ -195,25 +277,19 @@ def serve_file(subpath):
         return "File not found", 404
 
     try:
-        with open(file_path, 'rb') as f:
-            data = f.read()
-            
-        filename = os.path.basename(file_path)
-        response = Response(
-            data,
-            content_type='application/octet-stream'  # Force binary download
+        # Get file extension
+        ext = os.path.splitext(file_path)[1][1:].lower()
+        if ext not in ALLOWED_EXTENSIONS:
+            return "File type not allowed", 403
+
+        return send_file(
+            file_path,
+            as_attachment=True,
+            download_name=os.path.basename(file_path),
+            mimetype='application/octet-stream'
         )
-        
-        # Add headers to force download
-        response.headers['Content-Disposition'] = f'attachment; filename="{filename}"'
-        response.headers['Content-Description'] = 'File Transfer'
-        response.headers['Cache-Control'] = 'no-cache'
-        response.headers['X-Content-Type-Options'] = 'nosniff'
-        
-        return response
-        
     except Exception as e:
-        return str(e), 500
+        return f"Error serving file: {str(e)}", 500
 
 # Delete files or directories
 @app.route('/delete/<path:subpath>', methods=['POST'])
