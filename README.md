@@ -105,15 +105,42 @@ python fileserver.py
 
 Feel free to make pull requests or modify the code to fit your needs. To report bugs or request features, please visit [kcodfish.com/contactme](https://kcodfish.com/contactme).
 
-## License
+## License & Attribution
 
-This project is open source and available for any use. If you redistribute or modify this project, please provide appropriate attribution:
+### MIT License
 
-- Link back to the original repository
-- Credit the original author (kingcodfish)
-- Include this attribution notice in your README
-- State any significant changes made to the original code
+Copyright (c) 2025 kingcodfish
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+1. The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+2. Attribution must be given to the original author in any derivative works.
+
+### Attribution Requirements
+
+When using, modifying, or distributing this software, please:
+
+1. **Repository Link**
+   - Include a link to the original repository in your documentation
+   - Example: `Based on [Simple Python File Server](https://github.com/kingcodfish/simple-python-file-server)`
+
+2. **Author Credit**
+   - Credit the original author (kingcodfish)
+   - Include author's website: [kcodfish.com](https://kcodfish.com)
+
+3. **Changes Documentation**
+   - If you modify the code, add a section in your documentation that clearly states:
+     - What changes were made
+     - Why the changes were made
+     - Date of modifications
+
+4. **License Inclusion**
+   - Include this complete license and attribution section in your documentation
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Credits
 
-Created by [kingcodfish](https://kcodfish.com)
+Originally created by [kingcodfish](https://kcodfish.com)
+
+For bug reports or feature requests, visit: [kcodfish.com/contactme](https://kcodfish.com/contactme)
