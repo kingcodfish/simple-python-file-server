@@ -11,7 +11,6 @@ SERVER_PORT = 80         # HTTP default port
 # -------------------
 APP_TITLE = 'File server - Made by kingcodfish'
 UPLOAD_FOLDER = '/path/to/upload/directory'
-ALLOWED_EXTENSIONS = {'pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'jpg', 'jpeg', 'png', 'gif', 'mp3', 'wav', 'mp4', 'avi', 'zip', 'rar', '7z'}
 
 # File Type Icons
 # --------------
