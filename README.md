@@ -60,7 +60,12 @@ Feel free to make pull requests or modify the code to fit your needs. To report 
 
 ## License
 
-This project is open source and available for any use.
+This project is open source and available for any use. If you redistribute or modify this project, please provide appropriate attribution:
+
+- Link back to the original repository
+- Credit the original author (kingcodfish)
+- Include this attribution notice in your README
+- State any significant changes made to the original code
 
 ## Credits
 
