@@ -34,14 +34,38 @@ pip install flask
 The following settings can be modified in `fileserver.py`:
 
 ```python
-# Server Configuration
-SERVER_HOST = '0.0.0.0'  # Default host (0.0.0.0 allows external connections)
-SERVER_PORT = 80         # Default port number
+# Network Configuration
+SERVER_HOST = '0.0.0.0'  # Listen on all available interfaces
+SERVER_PORT = 80         # HTTP default port
 
-# Application Configuration
-APP_TITLE = 'File server - Made by kingcodfish'  # Browser title
-UPLOAD_FOLDER = '/path/to/upload/directory'      # Storage directory
+# Application Settings
+APP_TITLE = 'File server - Made by kingcodfish'
+UPLOAD_FOLDER = '/path/to/upload/directory'
+
+# File Icons
+FILE_ICONS = {
+    'pdf': '📄',    # Customize icons for each file type
+    'txt': '📝',    # Use emoji or text characters
+    'jpg': '🖼️',    # Add your own extensions and icons
+}
+DIR_ICON = '📁'     # Icon used for directories
 ```
+
+### Customizing File Icons
+
+You can add or modify file type icons by editing the `FILE_ICONS` dictionary:
+
+1. To add a new file type icon:
+```python
+FILE_ICONS = {
+    'existing': '📄',
+    'mynewtype': '🔮'  # Add your new file type and icon
+}
+```
+
+2. To remove an icon for a file type, simply remove it from the dictionary
+3. Files with undefined extensions will show no icon
+4. You can use emoji or text characters as icons
 
 ## Usage
 
