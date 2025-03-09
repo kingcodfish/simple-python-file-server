@@ -11,6 +11,7 @@ SERVER_PORT = 80         # HTTP default port
 # -------------------
 APP_TITLE = 'File server - Made by kingcodfish'
 UPLOAD_FOLDER = '/path/to/upload/directory'
+ALLOWED_EXTENSIONS = {'pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'jpg', 'jpeg', 'png', 'gif', 'mp3', 'wav', 'mp4', 'avi', 'zip', 'rar', '7z'}
 
 # File Type Icons
 # --------------
@@ -86,7 +87,7 @@ def get_file_details(path):
     for unit in ['B', 'KB', 'MB', 'GB']:
         if size < 1024:
             break
-        size /= 1024
+        size /= 1024.0
     size = f"{size:.1f} {unit}"
     
     # Convert timestamp to readable format
@@ -277,11 +278,6 @@ def serve_file(subpath):
         return "File not found", 404
 
     try:
-        # Get file extension
-        ext = os.path.splitext(file_path)[1][1:].lower()
-        if ext not in ALLOWED_EXTENSIONS:
-            return "File type not allowed", 403
-
         return send_file(
             file_path,
             as_attachment=True,
