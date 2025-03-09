@@ -14,12 +14,14 @@ This file server is intended for local network use only. It does not include:
 
 ## Features
 
-- 📤 Upload multiple files
+- 📤 Upload multiple files (no file type restrictions)
 - 📥 Download files
 - 📁 Create directories
 - 🗑️ Delete files and directories
 - 📱 Mobile-friendly interface
 - 🔍 Automatic file sorting (directories first)
+- 🎨 Customizable file type icons
+- 📊 File size and modification date display
 
 ## Installation
 
@@ -42,30 +44,51 @@ SERVER_PORT = 80         # HTTP default port
 APP_TITLE = 'File server - Made by kingcodfish'
 UPLOAD_FOLDER = '/path/to/upload/directory'
 
-# File Icons
+# File Type Icons Configuration
 FILE_ICONS = {
-    'pdf': '📄',    # Customize icons for each file type
-    'txt': '📝',    # Use emoji or text characters
-    'jpg': '🖼️',    # Add your own extensions and icons
+    # Documents
+    'pdf': '📄',
+    'txt': '📝',
+    'doc': '📄',
+    
+    # Spreadsheets
+    'xls': '📊',
+    'xlsx': '📊',
+    
+    # Media
+    'mp3': '🎵',
+    'mp4': '🎥',
+    
+    # Add your own icons here
 }
-DIR_ICON = '📁'     # Icon used for directories
+
+# Directory icon
+DIR_ICON = '📁'
 ```
 
 ### Customizing File Icons
 
-You can add or modify file type icons by editing the `FILE_ICONS` dictionary:
+The file server now supports fully customizable file type icons:
 
-1. To add a new file type icon:
-```python
-FILE_ICONS = {
-    'existing': '📄',
-    'mynewtype': '🔮'  # Add your new file type and icon
-}
-```
+1. **Adding New Icons**
+   ```python
+   FILE_ICONS = {
+       'existing': '📄',
+       'mynewtype': '🔮',  # Add custom file types
+       'py': '🐍'         # Use any emoji or text
+   }
+   ```
 
-2. To remove an icon for a file type, simply remove it from the dictionary
-3. Files with undefined extensions will show no icon
-4. You can use emoji or text characters as icons
+2. **Icon Display Rules**
+   - Files with matching extensions show their configured icon
+   - Files with unknown extensions show no icon
+   - Directories always show the DIR_ICON (📁 by default)
+   - Icons can be emoji or text characters
+
+3. **Changing Directory Icon**
+   ```python
+   DIR_ICON = '📂'  # Change to any icon you prefer
+   ```
 
 ## Usage
 
